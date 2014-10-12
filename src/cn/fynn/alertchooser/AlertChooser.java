@@ -190,8 +190,9 @@ import cn.fynn.alertchooser.util.*;
 
 					int padding = Util.dip2px(context, 10);
 					tv.setPadding(padding, padding, padding, padding);	//必须放在setBackground方法后调用，否则无效
-
-					iContent.addView(v);
+					
+					if(title != null)
+						iContent.addView(v);
 					iContent.addView(tv);
 				}
 
