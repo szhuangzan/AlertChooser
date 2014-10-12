@@ -7,30 +7,30 @@ In you project,add the following code:
 
 ```java
 {
-new AlertChooser.Builder(c)
-				.setTitle("温馨提示")
-				.addItem("选项一", new AlertChooser.OnItemClickListener() {
+new AlertChooser.Builder(this)
+	.setTitle("温馨提示")
+	.addItem("选项一", new AlertChooser.OnItemClickListener() {
 					
-					@Override
-					public void OnItemClick(DialogInterface chooser) {
-						Toast.makeText(c, "你点击了选项一", 0).show();
-					}
-				})
-				.addItem("选项二", new AlertChooser.OnItemClickListener() {
+		@Override
+		public void OnItemClick(DialogInterface chooser) {
+			Toast.makeText(c, "你点击了选项一", 0).show();
+		}
+	})
+	.addItem("选项二", new AlertChooser.OnItemClickListener() {
 					
-					@Override
-					public void OnItemClick(DialogInterface chooser) {
-						Toast.makeText(c, "你点击了选项二", 0).show();
-					}
-				})
-				.setNegativeItem("取消", new AlertChooser.OnItemClickListener() {
+		@Override
+		public void OnItemClick(DialogInterface chooser) {
+			Toast.makeText(c, "你点击了选项二", 0).show();
+		}
+	})
+	.setNegativeItem("取消", new AlertChooser.OnItemClickListener() {
 
-					@Override
-					public void OnItemClick(DialogInterface chooser) {
-						chooser.dismiss();
-					}
-				})
-				.show();
+		@Override
+		public void OnItemClick(DialogInterface chooser) {
+			chooser.dismiss();
+		}
+	})
+	.show();
 ```
 
 #Snapshot
