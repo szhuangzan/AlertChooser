@@ -34,6 +34,6 @@ new AlertChooser.Builder(this)
 ```
 
 #Snapshot
-![Snapshot](http://s7.sinaimg.cn/middle/0021tin2gy6MHLZo2p006&690)
+![Snapshot](http://s12.sinaimg.cn/middle/0021tin2zy6MKY25X4feb&690)
 
 
