@@ -9,66 +9,53 @@ package cn.fynn.alertchooser;
 
 public final class R {
     public static final class anim {
-        public static final int fynn_alertchooser_animation_in=0x7f040000;
-        public static final int fynn_alertchooser_animation_out=0x7f040001;
+        public static int fynn_alertchooser_animation_in=0x7f040000;
+        public static int fynn_alertchooser_animation_out=0x7f040001;
     }
     public static final class attr {
     }
     public static final class color {
-        public static final int transparent=0x7f050000;
+        public static int transparent=0x7f050000;
     }
     public static final class dimen {
-        /**  Default screen margins, per the Android Design guidelines. 
-
+        /** 
          Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f060000;
-        public static final int activity_vertical_margin=0x7f060001;
+        public static int activity_horizontal_margin=0x7f060000;
     }
     public static final class drawable {
-        public static final int fynn_alertchooser_bg_normal=0x7f020000;
-        public static final int fynn_alertchooser_item_bottom_normal=0x7f020001;
-        public static final int fynn_alertchooser_item_bottom_pressed=0x7f020002;
-        public static final int fynn_alertchooser_item_bottom_selector=0x7f020003;
-        public static final int fynn_alertchooser_item_middle_normal=0x7f020004;
-        public static final int fynn_alertchooser_item_middle_pressed=0x7f020005;
-        public static final int fynn_alertchooser_item_middle_selector=0x7f020006;
-        public static final int fynn_alertchooser_item_single_normal=0x7f020007;
-        public static final int fynn_alertchooser_item_single_pressed=0x7f020008;
-        public static final int fynn_alertchooser_item_single_selector=0x7f020009;
-        public static final int fynn_alertchooser_item_top_normal=0x7f02000a;
-        public static final int fynn_alertchooser_item_top_pressed=0x7f02000b;
-        public static final int fynn_alertchooser_item_top_selector=0x7f02000c;
-        public static final int ic_launcher=0x7f02000d;
+        public static int fynn_alertchooser_bg_normal=0x7f020000;
+        public static int fynn_alertchooser_item_bottom_normal=0x7f020001;
+        public static int fynn_alertchooser_item_bottom_pressed=0x7f020002;
+        public static int fynn_alertchooser_item_bottom_selector=0x7f020003;
+        public static int fynn_alertchooser_item_middle_normal=0x7f020004;
+        public static int fynn_alertchooser_item_middle_pressed=0x7f020005;
+        public static int fynn_alertchooser_item_middle_selector=0x7f020006;
+        public static int fynn_alertchooser_item_single_normal=0x7f020007;
+        public static int fynn_alertchooser_item_single_pressed=0x7f020008;
+        public static int fynn_alertchooser_item_single_selector=0x7f020009;
+        public static int fynn_alertchooser_item_top_normal=0x7f02000a;
+        public static int fynn_alertchooser_item_top_pressed=0x7f02000b;
+        public static int fynn_alertchooser_item_top_selector=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0003;
-        public static final int button1=0x7f0a0000;
-        public static final int content=0x7f0a0002;
-        public static final int title=0x7f0a0001;
+        public static int cancel=0x7f080002;
+        public static int content=0x7f080001;
+        public static int title=0x7f080000;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int fynn_alertchooser_normal=0x7f030001;
-    }
-    public static final class menu {
-        public static final int main=0x7f090000;
-    }
-    public static final class string {
-        public static final int action_settings=0x7f070002;
-        public static final int app_name=0x7f070000;
-        public static final int hello_world=0x7f070001;
+        public static int fynn_alertchooser_normal=0x7f030000;
     }
     public static final class style {
         /**  AlertChooser Theme 
          */
-        public static final int AlertChooser=0x7f080002;
+        public static int AlertChooser=0x7f070002;
         /**  AlertChooser Animation 
          */
-        public static final int AlertChooserAnimation=0x7f080003;
+        public static int AlertChooserAnimation=0x7f070003;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -90,10 +77,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f080000;
+        public static int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f080001;
+        public static int AppTheme=0x7f070001;
     }
 }

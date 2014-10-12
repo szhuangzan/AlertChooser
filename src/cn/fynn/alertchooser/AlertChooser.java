@@ -2,85 +2,218 @@ package cn.fynn.alertchooser;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import cn.fynn.alertchooser.util.*;
 
-public class AlertChooser extends Dialog {
+@SuppressLint("InflateParams") public class AlertChooser extends Dialog {
 
-	Context context;
-	ArrayList<CharSequence> itemText;
-	ArrayList<OnClickListener> itemClickListener;
-	
-	public AlertChooser(Context context) {
+	private Context context;
+
+	protected AlertChooser(Context context) {
 		super(context,R.style.AlertChooser);
 		this.context = context;
 	}
-	
-	public AlertChooser(Context context,int theme) {
+
+	protected AlertChooser(Context context,int theme) {
 		super(context,theme);
 		this.context = context;
 	}
-	
-	public void setTitle(CharSequence title){
-		TextView t = (TextView) findViewById(R.id.title);
-		t.setText(title);
-	}
-	
-	public void addItem(CharSequence text,View.OnClickListener itemClickListener){
-		itemText = new ArrayList<CharSequence>();
-		this.itemText.add(text);
-		this.itemClickListener.add(null);
-		
-		LinearLayout t = (LinearLayout) findViewById(R.id.content);
-		
-		View v = new View(context);
-		v.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,1));
-		v.setBackgroundColor(Color.parseColor("#DCDCDC"));
-		
-		TextView tv = new TextView(context);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-		tv.setLayoutParams(params);
-		tv.setGravity(Gravity.CENTER);
-		tv.setClickable(true);
-		int pad = Util.dip2px(context, 10);
-		tv.setPadding(pad, pad, pad, pad);
-		tv.setText(text);
-		tv.setOnClickListener(itemClickListener);
-		
-		t.addView(v);
-		t.addView(tv);
-	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fynn_alertchooser_normal);
-		
+
 		Window window = this.getWindow();
 		WindowManager.LayoutParams params = window.getAttributes();
-		params.width = Util.getScreenWidth(context);	
+		int marginBorder = Util.dip2px(context, 15);
+		params.width = Util.getScreenWidth(context) - marginBorder * 2;
 		params.gravity = Gravity.BOTTOM;
+		params.y = 20;
 		window.setAttributes(params);	
-		
-		this.addItem("确定", new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				Toast.makeText(context, "ok", 0).show();
+	}
+
+	public static class Builder{
+		private Context context;
+		private AlertChooser chooser;
+		private CharSequence title;
+		private CharSequence negativeItemText;
+		private OnItemClickListener negativeItemListener;
+		private ArrayList<CharSequence> itemTextList;
+		private ArrayList<OnItemClickListener> itemClickListenerList;
+		private boolean cancelable = true;
+		private boolean	canceledOnTouchOutside;
+
+		public Builder(Context context){
+			chooser = new AlertChooser(context);
+			this.context = context;
+			init();
+		}
+
+		public Builder(Context context,int theme){
+			chooser = new AlertChooser(context, theme);
+			this.context = context;
+			init();
+		}
+
+		private void init(){
+			itemTextList = new ArrayList<CharSequence>();
+			itemClickListenerList = new ArrayList<AlertChooser.OnItemClickListener>();
+		}
+
+		public Builder setTitle(CharSequence title){
+			this.title = title;
+			return this;
+		}
+
+		public Builder setTitle(int titleRes){
+			this.title = context.getResources().getString(titleRes);
+			return this;
+		}
+
+		public Builder addItem(CharSequence itemText,OnItemClickListener lis){
+			this.itemTextList.add(itemText);
+			this.itemClickListenerList.add(lis);
+			return this;
+		}
+
+		public Builder addItem(int itemTextRes,OnItemClickListener lis){
+			this.itemTextList.add(context.getResources().getString(itemTextRes));
+			this.itemClickListenerList.add(lis);
+			return this;
+		}
+
+		public Builder setNegativeItem(CharSequence text,OnItemClickListener lis){
+			this.negativeItemText = text;
+			this.negativeItemListener = lis;
+			return this;
+		}
+
+		public Builder setNegativeItem(int textRes,OnItemClickListener lis){
+			this.negativeItemText = context.getResources().getString(textRes);
+			this.negativeItemListener = lis;
+			return this;
+		}
+
+		public Builder setCancelable(boolean cancelable){
+			this.cancelable = cancelable;
+			return this;
+		}
+
+		public Builder setCanceledOnTouchOutside(boolean canceled){
+			this.canceledOnTouchOutside = canceled;
+			return this;
+		}
+
+		public AlertChooser create(){
+			if(chooser == null)
+				return null;
+
+			View iPanel = LayoutInflater.from(context).inflate(R.layout.fynn_alertchooser_normal, null);
+			TextView iTitle = (TextView) iPanel.findViewById(R.id.title);
+			TextView iCancel = (TextView) iPanel.findViewById(R.id.cancel);
+			LinearLayout iContent = (LinearLayout) iPanel.findViewById(R.id.content);
+
+			if(title != null){
+				iTitle.setVisibility(View.VISIBLE);
+				iTitle.setText(title);
+			}else{
+				iTitle.setVisibility(View.GONE);
 			}
-		});
+
+			if(negativeItemText != null){
+				iCancel.setVisibility(View.VISIBLE);
+				iCancel.setText(negativeItemText);
+
+				if(negativeItemListener != null){
+					iCancel.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							negativeItemListener.OnItemClick(chooser);
+						}
+					});
+				}
+			}else{
+				iCancel.setVisibility(View.GONE);
+			}
+
+			if(!itemTextList.isEmpty()){
+				for(int i = 0; i < itemTextList.size(); i++){
+					CharSequence text = itemTextList.get(i);
+					final OnItemClickListener lis = itemClickListenerList.get(i);
+
+					View v = new View(context);
+					v.setLayoutParams(new LinearLayout.LayoutParams(
+							LayoutParams.MATCH_PARENT,1));
+					v.setBackgroundColor(Color.parseColor("#DCDCDC"));
+
+					TextView tv = new TextView(context);
+					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+							LayoutParams.MATCH_PARENT,Util.dip2px(context, 40));
+					tv.setLayoutParams(params);
+					tv.setGravity(Gravity.CENTER);
+					tv.setClickable(true);
+					tv.setText(text);
+					tv.setTextColor(Color.parseColor("#007FFF"));
+					if(lis != null){
+						tv.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								lis.OnItemClick(chooser);
+							}
+						});
+					}
+
+					if(itemTextList.size() == 1)
+						tv.setBackgroundResource(R.drawable.fynn_alertchooser_item_bottom_selector);
+					else{
+						if(i == itemTextList.size() - 1){
+							tv.setBackgroundResource(R.drawable.fynn_alertchooser_item_bottom_selector);
+						}else{
+							tv.setBackgroundResource(R.drawable.fynn_alertchooser_item_middle_selector);
+						}
+					}
+
+					int padding = Util.dip2px(context, 10);
+					tv.setPadding(padding, padding, padding, padding);	//必须放在setBackground方法后调用，否则无效
+
+					iContent.addView(v);
+					iContent.addView(tv);
+				}
+
+			}else{
+				iContent.setVisibility(View.GONE);
+			}
+
+			chooser.setCancelable(cancelable);
+			chooser.setCanceledOnTouchOutside(canceledOnTouchOutside);
+
+			chooser.setContentView(iPanel);
+			return chooser;
+		}
+
+		public AlertChooser show(){
+			create().show();
+			return chooser;
+		}
+	}
+
+	public interface OnItemClickListener{
+		public void OnItemClick(DialogInterface chooser);
 	}
 
 }

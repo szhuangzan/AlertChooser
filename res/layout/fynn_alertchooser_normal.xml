@@ -9,40 +9,28 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/fynn_alertchooser_item_top_selector"
         android:gravity="center"
         android:padding="10dp"
-        android:text="title" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1.0px"
-        android:background="#DCDCDC" />
+        android:textColor="#C0C0C0"
+        android:textSize="13sp"
+        android:visibility="visible" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <LinearLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/content" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/fynn_alertchooser_item_bottom_selector"
-                android:clickable="true"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="ghfgdsa"
-                android:textColor="#007FFF" />
+            android:orientation="vertical" >
         </LinearLayout>
     </ScrollView>
 
     <TextView
+        android:id="@+id/cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -50,7 +38,7 @@
         android:clickable="true"
         android:gravity="center"
         android:padding="10dp"
-        android:text="取消"
-        android:textColor="#FF0000" />
+        android:textColor="#FF0000"
+        android:visibility="gone" />
 
 </LinearLayout>
