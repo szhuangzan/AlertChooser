@@ -6,7 +6,7 @@ In you project,"Properties -> Android -> Library -> Add -> AlertChooser”,and a
 In you project,add the following code:
 
 ```java
-{
+
 new AlertChooser.Builder(this)
 .setTitle("温馨提示")
 .addItem("选项一", new AlertChooser.OnItemClickListener() {
