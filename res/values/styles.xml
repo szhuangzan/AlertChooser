@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -15,6 +15,26 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    
+    <!-- AlertChooser Theme -->
+    <style name="AlertChooser" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!-- 边框 -->
+        <item name="android:windowIsFloating">true</item><!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item><!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item><!-- 无标题 -->
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item> <!-- default true -->
+        <item name="android:windowAnimationStyle">@style/AlertChooserAnimation</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+    
+     <!-- AlertChooser Animation -->
+    <style name="AlertChooserAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/fynn_alertchooser_animation_in</item>
+        <item name="android:windowExitAnimation">@anim/fynn_alertchooser_animation_out</item>
     </style>
 
 </resources>

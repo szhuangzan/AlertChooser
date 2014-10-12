@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -21,7 +22,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
-				AlertChooser ac = new AlertChooser(MainActivity.this, 0);
+				AlertChooser ac = new AlertChooser(MainActivity.this, R.style.AlertChooser);
 				ac.show();
 			}
 		});
