@@ -54,7 +54,7 @@ import cn.fynn.alertchooser.util.*;
 		private ArrayList<CharSequence> itemTextList;
 		private ArrayList<OnItemClickListener> itemClickListenerList;
 		private boolean cancelable = true;
-		private boolean	canceledOnTouchOutside;
+		private boolean	canceledOnTouchOutside = true;
 
 		public Builder(Context context){
 			chooser = new AlertChooser(context);
@@ -214,7 +214,7 @@ import cn.fynn.alertchooser.util.*;
 	}
 
 	public interface OnItemClickListener{
-		public void OnItemClick(DialogInterface chooser);
+		public void OnItemClick(AlertChooser chooser);
 	}
 
 }
