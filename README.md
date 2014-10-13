@@ -12,21 +12,21 @@ new AlertChooser.Builder(this)
 .addItem("选项一", new AlertChooser.OnItemClickListener() {
 					
 	@Override
-	public void OnItemClick(DialogInterface chooser) {
+	public void OnItemClick(AlertChooser chooser) {
 		Toast.makeText(this, "你点击了选项一", 0).show();
 	}
 })
 .addItem("选项二", new AlertChooser.OnItemClickListener() {
 					
 	@Override
-	public void OnItemClick(DialogInterface chooser) {
+	public void OnItemClick(AlertChooser chooser) {
 		Toast.makeText(this, "你点击了选项二", 0).show();
 	}
 })
 .setNegativeItem("取消", new AlertChooser.OnItemClickListener() {
 
 	@Override
-	public void OnItemClick(DialogInterface chooser) {
+	public void OnItemClick(AlertChooser chooser) {
 		chooser.dismiss();
 	}
 })
