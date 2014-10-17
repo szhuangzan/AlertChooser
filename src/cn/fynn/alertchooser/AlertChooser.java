@@ -42,7 +42,7 @@ import cn.fynn.alertchooser.util.*;
 		params.width = Util.getScreenWidth(context) - marginBorder * 2;
 		params.gravity = Gravity.BOTTOM;
 		params.y = 20;
-		window.setAttributes(params);	
+		window.setAttributes(params);
 	}
 
 	public static class Builder{
@@ -178,19 +178,11 @@ import cn.fynn.alertchooser.util.*;
 						});
 					}
 
-					if(itemTextList.size() == 1)
-						tv.setBackgroundResource(R.drawable.fynn_alertchooser_item_bottom_selector);
-					else{
-						if(i == itemTextList.size() - 1){
-							tv.setBackgroundResource(R.drawable.fynn_alertchooser_item_bottom_selector);
-						}else{
-							tv.setBackgroundResource(R.drawable.fynn_alertchooser_item_middle_selector);
-						}
-					}
+					setItemBackgroundResource(tv,i);
 
 					int padding = Util.dip2px(context, 10);
 					tv.setPadding(padding, padding, padding, padding);	//必须放在setBackground方法后调用，否则无效
-					
+
 					if(title != null)
 						iContent.addView(v);
 					iContent.addView(tv);
@@ -205,6 +197,27 @@ import cn.fynn.alertchooser.util.*;
 
 			chooser.setContentView(iPanel);
 			return chooser;
+		}
+
+		private void setItemBackgroundResource(TextView textView, int index){
+			if(title == null){
+				if(itemTextList.size() == 1)
+					textView.setBackgroundResource(R.drawable.fynn_alertchooser_item_single_selector);
+				else if(index == 0)
+					textView.setBackgroundResource(R.drawable.fynn_alertchooser_item_top_selector);
+				else if(index == itemTextList.size() - 1)
+					textView.setBackgroundResource(R.drawable.fynn_alertchooser_item_bottom_selector);
+				else
+					textView.setBackgroundResource(R.drawable.fynn_alertchooser_item_single_selector);
+
+			}else{
+				if(itemTextList.size() == 1)
+					textView.setBackgroundResource(R.drawable.fynn_alertchooser_item_bottom_selector);
+				else if(index == itemTextList.size() - 1)
+					textView.setBackgroundResource(R.drawable.fynn_alertchooser_item_bottom_selector);
+				else
+					textView.setBackgroundResource(R.drawable.fynn_alertchooser_item_middle_selector);
+			}
 		}
 
 		public AlertChooser show(){

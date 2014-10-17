@@ -17,3 +17,6 @@ classes
 target
 release.properties
 pom.xml.*
+.classpath
+
+.classpath
