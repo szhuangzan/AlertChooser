@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -38,7 +37,7 @@ import cn.fynn.alertchooser.util.*;
 
 		Window window = this.getWindow();
 		WindowManager.LayoutParams params = window.getAttributes();
-		int marginBorder = Util.dip2px(context, 15);
+		int marginBorder = Util.dip2px(context, 10);
 		params.width = Util.getScreenWidth(context) - marginBorder * 2;
 		params.gravity = Gravity.BOTTOM;
 		params.y = 20;
@@ -158,7 +157,7 @@ import cn.fynn.alertchooser.util.*;
 					View v = new View(context);
 					v.setLayoutParams(new LinearLayout.LayoutParams(
 							LayoutParams.MATCH_PARENT,1));
-					v.setBackgroundColor(Color.parseColor("#DCDCDC"));
+					v.setBackgroundColor(Color.parseColor("#CCDCDCDC"));
 
 					TextView tv = new TextView(context);
 					LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
